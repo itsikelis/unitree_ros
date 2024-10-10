@@ -845,6 +845,15 @@
       </geometry>
     </collision>
   </link>
+
+  <!-- Left Hand Point Contact Frames -->
+  <link name="left_hand_point_contact"/>
+  <joint name="left_hand_point_contact_fix_joint" type="fixed">
+    <parent link="left_wrist_roll_rubber_hand"/>
+    <child link="left_hand_point_contact"/>
+    <origin rpy="0 0 0" xyz="0.17 0.0 0.0"/>
+  </joint>
+
   <link name="right_shoulder_pitch_link">
     <inertial>
       <origin xyz="0 -0.035892 -0.011628" rpy="0 0 0"/>
@@ -990,4 +999,13 @@
       </geometry>
     </collision>
   </link>
+  
+  <!-- Right Hand Point Contact Frames -->
+  <link name="right_hand_point_contact"/>
+  <joint name="right_hand_point_contact_fix_joint" type="fixed">
+    <parent link="right_wrist_roll_rubber_hand"/>
+    <child link="right_hand_point_contact"/>
+    <origin rpy="0 0 0" xyz="0.17 0.0 0.0"/>
+  </joint>
+
 </robot>
