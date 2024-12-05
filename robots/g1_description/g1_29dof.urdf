@@ -3,12 +3,9 @@
     <compiler meshdir="meshes" discardvisual="false"/>
   </mujoco>
 
-  <!-- [CAUTION] uncomment when convert to mujoco -->
-  <!-- <link name="world"></link>
-  <joint name="floating_base_joint" type="floating">
-    <parent link="world"/>
-    <child link="pelvis"/>
-  </joint> -->
+  <link name="world">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </link>
 
   <link name="pelvis">
     <inertial>
@@ -26,6 +23,14 @@
       </material>
     </visual>
   </link>
+
+  <!-- Dummy Floating Joint -->
+  <joint name="dummy" type="floating">
+    <parent link="world"/>
+    <child link="pelvis"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 -0.03"/>
+  </joint>
+
   <link name="pelvis_contour_link">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -246,6 +251,55 @@
     <axis xyz="1 0 0"/>
     <limit lower="-0.2618" upper="0.2618" effort="50" velocity="37"/>
   </joint>
+
+  <!-- Left Foot Plane Contact Frames -->
+  <link name="left_foot_upper_left"/>
+  <link name="left_foot_upper_right"/>
+  <link name="left_foot_lower_left"/>
+  <link name="left_foot_lower_right"/>
+  <joint name="left_foot_upper_left_fix_joint" type="fixed">
+    <parent link="left_ankle_roll_link"/>
+    <child link="left_foot_upper_left"/>
+    <origin rpy="0 0 0" xyz="0.12 0.03 -0.03"/>
+  </joint>
+  <joint name="left_foot_upper_right_fix_joint" type="fixed">
+    <parent link="left_ankle_roll_link"/>
+    <child link="left_foot_upper_right"/>
+    <origin rpy="0 0 0" xyz="0.12 -0.03 -0.03"/>
+  </joint>
+  <joint name="left_foot_lower_left_fix_joint" type="fixed">
+    <parent link="left_ankle_roll_link"/>
+    <child link="left_foot_lower_left"/>
+    <origin rpy="0 0 0" xyz="-0.05 0.025 -0.03"/>
+  </joint>
+  <joint name="left_foot_lower_right_fix_joint" type="fixed">
+    <parent link="left_ankle_roll_link"/>
+    <child link="left_foot_lower_right"/>
+    <origin rpy="0 0 0" xyz="-0.05 -0.025 -0.03"/>
+  </joint>
+
+  <!-- Left Foot Line Contact Frames -->
+  <link name="left_foot_line_contact_upper"/>
+  <link name="left_foot_line_contact_lower"/>
+  <joint name="left_foot_line_contact_upper_fix_joint" type="fixed">
+    <parent link="left_ankle_roll_link"/>
+    <child link="left_foot_line_contact_upper"/>
+    <origin rpy="0 0 0" xyz="0.12 0.0 -0.03"/>
+  </joint>
+  <joint name="left_foot_line_contact_lower_fix_joint" type="fixed">
+    <parent link="left_ankle_roll_link"/>
+    <child link="left_foot_line_contact_lower"/>
+    <origin rpy="0 0 0" xyz="-0.05 0.0 -0.03"/>
+  </joint>
+
+    <!-- Left Foot Point Contact Frames -->
+    <link name="left_foot_point_contact"/>
+    <joint name="left_foot_point_contact_fix_joint" type="fixed">
+        <parent link="left_ankle_roll_link"/>
+        <child link="left_foot_point_contact"/>
+        <origin rpy="0 0 0" xyz="0.0 0.0 -0.03"/>
+    </joint>
+
   <link name="right_hip_pitch_link">
     <inertial>
       <origin xyz="0.002741 -0.047791 -0.02606" rpy="0 0 0"/>
@@ -437,6 +491,54 @@
     <child link="right_ankle_roll_link"/>
     <axis xyz="1 0 0"/>
     <limit lower="-0.2618" upper="0.2618" effort="50" velocity="37"/>
+  </joint>
+
+  <!-- Right Foot Plane Contact Frames -->
+  <link name="right_foot_upper_left"/>
+  <link name="right_foot_upper_right"/>
+  <link name="right_foot_lower_left"/>
+  <link name="right_foot_lower_right"/>
+  <joint name="right_foot_upper_left_fix_joint" type="fixed">
+    <parent link="right_ankle_roll_link"/>
+    <child link="right_foot_upper_left"/>
+    <origin rpy="0 0 0" xyz="0.12 0.03 -0.03"/>
+  </joint>
+  <joint name="right_foot_upper_right_fix_joint" type="fixed">
+    <parent link="right_ankle_roll_link"/>
+    <child link="right_foot_upper_right"/>
+    <origin rpy="0 0 0" xyz="0.12 -0.03 -0.03"/>
+  </joint>
+  <joint name="right_foot_lower_left_fix_joint" type="fixed">
+    <parent link="right_ankle_roll_link"/>
+    <child link="right_foot_lower_left"/>
+    <origin rpy="0 0 0" xyz="-0.05 0.025 -0.03"/>
+  </joint>
+  <joint name="right_foot_lower_right_fix_joint" type="fixed">
+    <parent link="right_ankle_roll_link"/>
+    <child link="right_foot_lower_right"/>
+    <origin rpy="0 0 0" xyz="-0.05 -0.025 -0.03"/>
+  </joint>
+
+  <!-- Right Foot Line Contact Frames -->
+  <link name="right_foot_line_contact_upper"/>
+  <link name="right_foot_line_contact_lower"/>
+  <joint name="right_foot_line_contact_upper_fix_joint" type="fixed">
+    <parent link="right_ankle_roll_link"/>
+    <child link="right_foot_line_contact_upper"/>
+    <origin rpy="0 0 0" xyz="0.12 0.0 -0.03"/>
+  </joint>
+  <joint name="right_foot_line_contact_lower_fix_joint" type="fixed">
+    <parent link="right_ankle_roll_link"/>
+    <child link="right_foot_line_contact_lower"/>
+    <origin rpy="0 0 0" xyz="-0.05 0.0 -0.03"/>
+  </joint>
+
+  <!-- Right Foot Point Contact Frames -->
+  <link name="right_foot_point_contact"/>
+  <joint name="right_foot_point_contact_fix_joint" type="fixed">
+    <parent link="right_ankle_roll_link"/>
+    <child link="right_foot_point_contact"/>
+    <origin rpy="0 0 0" xyz="0.0 0.0 -0.03"/>
   </joint>
 
   <!-- Torso -->
@@ -852,6 +954,15 @@
       </material>
     </visual>
   </link>
+
+  <!-- Left Hand Point Contact Frames -->
+  <link name="left_hand_point_contact"/>
+  <joint name="left_hand_point_contact_fix_joint" type="fixed">
+    <parent link="left_rubber_hand"/>
+    <child link="left_hand_point_contact"/>
+    <origin rpy="0 0 0" xyz="0.17 0.0 0.0"/>
+  </joint>
+
   <link name="right_shoulder_pitch_link">
     <inertial>
       <origin xyz="0 -0.035892 -0.011628" rpy="0 0 0"/>
@@ -1076,4 +1187,13 @@
       </material>
     </visual>
   </link>
+
+  <!-- Right Hand Point Contact Frames -->
+  <link name="right_hand_point_contact"/>
+  <joint name="right_hand_point_contact_fix_joint" type="fixed">
+    <parent link="right_rubber_hand"/>
+    <child link="right_hand_point_contact"/>
+    <origin rpy="0 0 0" xyz="0.17 0.0 0.0"/>
+  </joint>
+
 </robot>
